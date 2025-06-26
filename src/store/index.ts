@@ -1,16 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './authSlice';
 import sitesReducer from './sitesSlice';
-import tasksReducer from './tasksSlice';
-import materialsReducer from './materialsSlice';
+import supervisorsReducer from './supervisorsSlice';
 import vendorsReducer from './vendorsSlice';
 
 export const store = configureStore({
   reducer: {
-    auth: authReducer,
     sites: sitesReducer,
-    tasks: tasksReducer,
-    materials: materialsReducer,
+    supervisors: supervisorsReducer,
     vendors: vendorsReducer,
   },
 });
