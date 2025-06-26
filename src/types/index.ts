@@ -1,71 +1,139 @@
-export type UserRole = 'superadmin' | 'supervisor' | 'procurement' | 'accountant';
+export type Role = 'superadmin' | 'supervisor' | 'procurement' | 'accountant';
 
 export interface User {
   id: string;
   name: string;
-  role: UserRole;
   email: string;
+  phone: string;
+  role: Role;
+  status: 'active' | 'inactive';
 }
 
 export interface Site {
   id: string;
   name: string;
-  location: string;
+  address: string;
+  status: 'active' | 'on-hold' | 'completed';
   progress: number;
-  budget: number;
-  actualSpent: number;
+  totalBudget: number;
+  spentBudget: number;
   supervisorId: string;
-  materialUsage: {
-    [key: string]: number;
-  };
+  tasks: Task[];
 }
 
 export interface Task {
   id: string;
-  siteId: string;
   title: string;
   description: string;
   status: 'pending' | 'in-progress' | 'completed';
-  deadline: string;
-  materials: {
-    materialId: string;
-    quantity: number;
-  }[];
+  dueDate: string;
+  assignedTo: string;
+  siteId: string;
+  materialRequests: MaterialRequest[];
 }
 
 export interface MaterialRequest {
   id: string;
   siteId: string;
-  supervisorId: string;
-  materials: {
-    materialId: string;
-    quantity: number;
-    estimatedPrice: number;
-  }[];
+  materialName: string;
+  quantity: number;
+  unit: string;
+  urgency: 'normal' | 'urgent' | 'critical';
   status: 'pending' | 'approved' | 'rejected';
+  notes: string;
   createdAt: string;
+  updatedAt: string;
+}
+
+export interface MaterialItem {
+  id: string;
+  name: string;
+  quantity: number;
+  unit: string;
+  estimatedPrice: number;
 }
 
 export interface Bill {
   id: string;
-  requestId: string;
   vendorId: string;
+  description: string;
   items: {
-    materialId: string;
+    name: string;
     quantity: number;
-    unitPrice: number;
+    unit: string;
+    price: number;
   }[];
   totalAmount: number;
   gst: number;
   status: 'pending' | 'approved' | 'rejected';
-  imageUrl?: string;
   createdAt: string;
+  updatedAt: string;
+  approvedBy?: string;
+  rejectedBy?: string;
+  rejectionReason?: string;
+}
+
+export interface BillItem {
+  materialId: string;
+  quantity: number;
+  unitPrice: number;
+}
+
+export interface Supervisor {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  status: 'active' | 'inactive';
+}
+
+export interface SitesState {
+  sites: Site[];
+  supervisors: Supervisor[];
+  loading: boolean;
+  error: string | null;
+}
+
+export interface MaterialsState {
+  requests: MaterialRequest[];
+  bills: Bill[];
+  loading: boolean;
+  error: string | null;
+}
+
+export interface TasksState {
+  tasks: Task[];
+  loading: boolean;
+  error: string | null;
+}
+
+export interface AuthState {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    role: 'superadmin' | 'supervisor' | 'accountant' | 'procurement';
+  } | null;
+  token: string | null;
+  loading: boolean;
+  error: string | null;
 }
 
 export interface Vendor {
   id: string;
   name: string;
-  contact: string;
-  materials: string[]; // List of material IDs they supply
-  rating: number;
+  email: string;
+  phone: string;
+  address: string;
+  status: 'active' | 'inactive';
+  gstNumber: string;
+  totalBills: number;
+  totalAmount: number;
+}
+
+export interface VendorsState {
+  vendors: Vendor[];
+  selectedVendor: Vendor | null;
+  loading: boolean;
+  error: string | null;
 } 
