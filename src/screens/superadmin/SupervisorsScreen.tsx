@@ -36,6 +36,7 @@ export default function SupervisorsScreen() {
 
   return (
     <View style={styles.container}>
+      <Text variant="headlineMedium">Supervisors Management</Text>
       <ScrollView>
         <Card style={styles.summaryCard}>
           <Card.Content>
@@ -196,7 +197,7 @@ export default function SupervisorsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    padding: 16,
   },
   summaryCard: {
     margin: 10,
