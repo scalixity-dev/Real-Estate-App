@@ -13,12 +13,11 @@ export interface Site {
   id: string;
   name: string;
   address: string;
-  status: 'active' | 'on-hold' | 'completed';
+  status: 'active' | 'completed' | 'on-hold';
   progress: number;
   totalBudget: number;
   spentBudget: number;
   supervisorId: string;
-  tasks: Task[];
 }
 
 export interface Task {
@@ -29,20 +28,37 @@ export interface Task {
   dueDate: string;
   assignedTo: string;
   siteId: string;
-  materialRequests: MaterialRequest[];
+  progress: number;
+  subtasks: Subtask[];
+  comments: Comment[];
+}
+
+export interface Subtask {
+  id: string;
+  title: string;
+  completed: boolean;
+}
+
+export interface Comment {
+  id: string;
+  text: string;
+  userId: string;
+  timestamp: string;
 }
 
 export interface MaterialRequest {
   id: string;
   siteId: string;
-  materialName: string;
+  requestedBy: string;
+  status: 'pending' | 'approved' | 'rejected';
+  date: string;
+  materials: RequestedMaterial[];
+}
+
+export interface RequestedMaterial {
+  materialId: string;
   quantity: number;
   unit: string;
-  urgency: 'normal' | 'urgent' | 'critical';
-  status: 'pending' | 'approved' | 'rejected';
-  notes: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export interface MaterialItem {
@@ -56,21 +72,11 @@ export interface MaterialItem {
 export interface Bill {
   id: string;
   vendorId: string;
-  description: string;
-  items: {
-    name: string;
-    quantity: number;
-    unit: string;
-    price: number;
-  }[];
+  siteId: string;
+  date: string;
   totalAmount: number;
-  gst: number;
   status: 'pending' | 'approved' | 'rejected';
-  createdAt: string;
-  updatedAt: string;
-  approvedBy?: string;
-  rejectedBy?: string;
-  rejectionReason?: string;
+  items: BillItem[];
 }
 
 export interface BillItem {
@@ -85,6 +91,7 @@ export interface Supervisor {
   email: string;
   phone: string;
   status: 'active' | 'inactive';
+  assignedSites: string[];
 }
 
 export interface SitesState {
@@ -108,14 +115,9 @@ export interface TasksState {
 }
 
 export interface AuthState {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    role: 'superadmin' | 'supervisor' | 'accountant' | 'procurement';
-  } | null;
+  user: User | null;
   token: string | null;
-  loading: boolean;
+  isLoading: boolean;
   error: string | null;
 }
 
@@ -125,10 +127,8 @@ export interface Vendor {
   email: string;
   phone: string;
   address: string;
-  status: 'active' | 'inactive';
   gstNumber: string;
-  totalBills: number;
-  totalAmount: number;
+  status: 'active' | 'inactive';
 }
 
 export interface VendorsState {

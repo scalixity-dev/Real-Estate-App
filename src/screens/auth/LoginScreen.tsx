@@ -64,6 +64,7 @@ export default function LoginScreen() {
           onChangeText={setUsername}
           style={styles.input}
           autoCapitalize="none"
+          mode="outlined"
         />
 
         <TextInput
@@ -72,6 +73,7 @@ export default function LoginScreen() {
           onChangeText={setPassword}
           secureTextEntry
           style={styles.input}
+          mode="outlined"
         />
 
         <Text variant="titleMedium" style={styles.roleLabel}>Select Role</Text>
@@ -79,19 +81,13 @@ export default function LoginScreen() {
           value={role}
           onValueChange={value => setRole(value as Role)}
           buttons={[
+            { value: 'superadmin', label: 'Super Admin' },
             { value: 'supervisor', label: 'Supervisor' },
             { value: 'procurement', label: 'Procurement' },
             { value: 'accountant', label: 'Accountant' },
           ]}
           style={styles.roleButtons}
         />
-        <Button
-          mode="contained"
-          style={styles.superAdminButton}
-          onPress={() => setRole('superadmin')}
-        >
-          Login as Super Admin
-        </Button>
 
         {error && (
           <Text style={[styles.errorText, { color: theme.colors.error }]}>
@@ -135,9 +131,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   roleButtons: {
-    marginBottom: 16,
-  },
-  superAdminButton: {
     marginBottom: 24,
   },
   loginButton: {

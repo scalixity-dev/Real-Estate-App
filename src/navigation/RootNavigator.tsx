@@ -13,10 +13,10 @@ import SuperAdminTabs from './SuperAdminTabs';
 import SupervisorTabs from './SupervisorTabs';
 import ProcurementTabs from './ProcurementTabs';
 import AccountantTabs from './AccountantTabs';
+import BillDetailsScreen from '../screens/common/BillDetailsScreen';
+import RequestDetailsScreen from '../screens/common/RequestDetailsScreen';
 import SiteDetailsScreen from '../screens/common/SiteDetailsScreen';
 import TaskDetailsScreen from '../screens/common/TaskDetailsScreen';
-import RequestDetailsScreen from '../screens/common/RequestDetailsScreen';
-import BillDetailsScreen from '../screens/common/BillDetailsScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -53,7 +53,7 @@ export default function RootNavigator() {
           headerShown: false,
         }}
       >
-        {!user || !token ? (
+        {!user ? (
           <Stack.Screen name="Login" component={LoginScreen} />
         ) : (
           <>
