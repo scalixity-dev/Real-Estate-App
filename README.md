@@ -1,50 +1,102 @@
+# Construction Management App
 
-# TypeScript
+A React Native application for managing construction sites, tasks, and resources.
 
-[![CI](https://github.com/microsoft/TypeScript/actions/workflows/ci.yml/badge.svg)](https://github.com/microsoft/TypeScript/actions/workflows/ci.yml)
-[![npm version](https://badge.fury.io/js/typescript.svg)](https://www.npmjs.com/package/typescript)
-[![Downloads](https://img.shields.io/npm/dm/typescript.svg)](https://www.npmjs.com/package/typescript)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/microsoft/TypeScript/badge)](https://securityscorecards.dev/viewer/?uri=github.com/microsoft/TypeScript)
+## Features
 
+- Multi-role support (SuperAdmin, Supervisor, Procurement, Accountant)
+- Site management and progress tracking
+- Task assignment and monitoring
+- Material request and procurement workflow
+- Budget tracking and billing management
+- Analytics and reporting
 
-[TypeScript](https://www.typescriptlang.org/) is a language for application-scale JavaScript. TypeScript adds optional types to JavaScript that support tools for large-scale JavaScript applications for any browser, for any host, on any OS. TypeScript compiles to readable, standards-based JavaScript. Try it out at the [playground](https://www.typescriptlang.org/play/), and stay up to date via [our blog](https://blogs.msdn.microsoft.com/typescript) and [Twitter account](https://twitter.com/typescript).
+## Prerequisites
 
-Find others who are using TypeScript at [our community page](https://www.typescriptlang.org/community/).
+- Node.js (v14.17 or higher)
+- npm (v8.19.4 or higher)
+- Expo CLI
+- Android Studio (for Android development)
+- Xcode (for iOS development, macOS only)
 
-## Installing
+## Setup Instructions
 
-For the latest stable version:
-
+1. Install dependencies:
 ```bash
-npm install -D typescript
+npm install
 ```
 
-For our nightly builds:
+2. Set up Android development environment:
 
+a. Install Android Studio:
+   - Download from https://developer.android.com/studio
+   - During installation, make sure to select:
+     - Android SDK
+     - Android SDK Platform
+     - Android Virtual Device
+   - Complete the installation and launch Android Studio
+
+b. Configure Android SDK:
+   - Open Android Studio
+   - Go to Settings/Preferences > Appearance & Behavior > System Settings > Android SDK
+   - In the SDK Platforms tab, select:
+     - Android 13 (API Level 33)
+     - Android 12 (API Level 31)
+   - In the SDK Tools tab, select:
+     - Android SDK Build-Tools
+     - Android SDK Command-line Tools
+     - Android Emulator
+     - Android SDK Platform-Tools
+
+c. Set up environment variables:
+   - Run the provided setup script:
 ```bash
-npm install -D typescript@next
+./setup-android.ps1
+```
+   - Restart your terminal after running the script
+
+3. Start the development server:
+```bash
+npm start
 ```
 
-## Contribute
+4. Run on Android:
+```bash
+npm run android
+```
 
-There are many ways to [contribute](https://github.com/microsoft/TypeScript/blob/main/CONTRIBUTING.md) to TypeScript.
-* [Submit bugs](https://github.com/microsoft/TypeScript/issues) and help us verify fixes as they are checked in.
-* Review the [source code changes](https://github.com/microsoft/TypeScript/pulls).
-* Engage with other TypeScript users and developers on [StackOverflow](https://stackoverflow.com/questions/tagged/typescript).
-* Help each other in the [TypeScript Community Discord](https://discord.gg/typescript).
-* Join the [#typescript](https://twitter.com/search?q=%23TypeScript) discussion on Twitter.
-* [Contribute bug fixes](https://github.com/microsoft/TypeScript/blob/main/CONTRIBUTING.md).
+5. Run on iOS (macOS only):
+```bash
+npm run ios
+```
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see
-the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com)
-with any additional questions or comments.
+## Project Structure
 
-## Documentation
+```
+RealEstate/
+├── src/
+│   ├── navigation/    # Navigation configuration
+│   ├── screens/       # Screen components
+│   ├── store/         # Redux store and slices
+│   ├── types/         # TypeScript type definitions
+│   └── components/    # Reusable components
+├── assets/            # Images and other static files
+└── App.tsx           # Root component
+```
 
-*  [TypeScript in 5 minutes](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
-*  [Programming handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
-*  [Homepage](https://www.typescriptlang.org/)
+## Available Scripts
 
-## Roadmap
+- `npm start`: Start the Expo development server
+- `npm run android`: Run the app on Android
+- `npm run ios`: Run the app on iOS
+- `npm run web`: Run the app in a web browser
 
-For details on our planned features and future direction, please refer to our [roadmap](https://github.com/microsoft/TypeScript/wiki/Roadmap).
+## Contributing
+
+1. Create a feature branch
+2. Make your changes
+3. Submit a pull request
+
+## License
+
+This project is licensed under the Apache 2.0 License - see the LICENSE file for details
